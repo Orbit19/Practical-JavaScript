@@ -2,13 +2,13 @@
 
 <html>
   <head> 
-    <title>Practical JavaScript Version 7</title>
+    <title>Practical JavaScript Version 7 Refactored</title>
   </head>
 
   <body> 
     <h1>Todo List</h1>
-    <button id = "displayTodosButton">Display Todos</button>
-    <button id = "toggleAllButton">Toggle All</button>
+    <button onclick = "handlers.displayTodos()">Display Todos</button>
+    <button onclick = "handlers.toggleAllTodos()">Toggle All</button>
 
     <script>
     var todoList = {
@@ -27,7 +27,7 @@
           }
         }
       },
-    
+      
       addTodo: function(todoText) {
         this.todos.push({
         todoText: todoText,
@@ -72,16 +72,14 @@
         this.displayTodos();  
        }
     };
-
-    var displayTodosButton = document.getElementById('displayTodosButton');
-    displayTodosButton.addEventListener('click', function() {
-    todoList.displayTodos();
-    });
-
-    var toggleAllButton = document.getElementById('toggleAllButton');
-    toggleAllButton.addEventListener('click', function() {
-      todoList.toggleAll();
-    });
+    var handlers = {
+      displayTodos: function() {
+        todoList.displayTodos();
+      },
+      toggleAllTodos: function() {
+        todoList.toggleAll();
+      }
+    };
     </script>
   </body>
 </html>
