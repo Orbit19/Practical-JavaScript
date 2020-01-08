@@ -2,13 +2,36 @@
 
 <html>
   <head> 
-    <title>Practical JavaScript Version 7</title>
+    <title>Practical JavaScript Version 8</title>
   </head>
 
   <body> 
     <h1>Todo List</h1>
-    <button id = "displayTodosButton">Display Todos</button>
-    <button id = "toggleAllButton">Toggle All</button>
+    <div>
+      <button onclick = "handlers.displayTodos()">Display Todos</button>
+      <button onclick = "handlers.toggleAllTodos()">Toggle All</button>
+    </div>
+    
+    <div> 
+      <button onclick = "handlers.addTodo()">Add</button>
+      <input id="addTodoTextInput" type="text">
+    </div>
+
+    <div>
+      <button onclick="handlers.changeTodo()">Change Todo</button>
+      <input id="changeTodoPositionInput" type="number">
+      <input id="changeTodoTextInput" type="text">
+    </div>
+
+    <div>
+      <button onclick="handlers.deleteTodo()">Delete</button>
+      <input id="deleteTodoPositionInput" type="number">
+    </div>
+
+    <div>
+      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+      <input id="toggleCompletedPositionInput" type="number">
+    </div>
 
     <script>
     var todoList = {
@@ -27,7 +50,7 @@
           }
         }
       },
-    
+
       addTodo: function(todoText) {
         this.todos.push({
         todoText: todoText,
@@ -72,16 +95,36 @@
         this.displayTodos();  
        }
     };
-
-    var displayTodosButton = document.getElementById('displayTodosButton');
-    displayTodosButton.addEventListener('click', function() {
-    todoList.displayTodos();
-    });
-
-    var toggleAllButton = document.getElementById('toggleAllButton');
-    toggleAllButton.addEventListener('click', function() {
-      todoList.toggleAll();
-    });
+    var handlers = {
+      displayTodos: function() {
+        todoList.displayTodos();
+      },
+      toggleAllTodos: function() {
+        todoList.toggleAll();
+      },
+      addTodo: function() {
+        var addTodoTextInput = document.getElementById('addTodoTextInput');
+        todoList.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
+      },
+      changeTodo: function () {
+        var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+        var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+        todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.value = '';
+        changeTodoTextInput.value = '';
+      },
+      deleteTodo: function () {
+        var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+        deleteTodoPositionInput.value = '';
+      },
+      toggleCompleted: function () {
+        var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+        todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+        toggleCompletedPositionInput.value = '';
+      }
+    };
     </script>
   </body>
 </html>
