@@ -2,13 +2,20 @@
 
 <html>
   <head> 
-    <title>Practical JavaScript Version 7 Refactored</title>
+    <title>Practical JavaScript Version 8</title>
   </head>
 
   <body> 
     <h1>Todo List</h1>
-    <button onclick = "handlers.displayTodos()">Display Todos</button>
-    <button onclick = "handlers.toggleAllTodos()">Toggle All</button>
+    <div>
+      <button onclick = "handlers.displayTodos()">Display Todos</button>
+      <button onclick = "handlers.toggleAllTodos()">Toggle All</button>
+    </div>
+    
+    <div> 
+      <button onclick = "handlers.addTodo()">Add</button>
+      <input id="addTodoTextInput" type="text">
+    </div>
 
     <script>
     var todoList = {
@@ -27,7 +34,7 @@
           }
         }
       },
-      
+
       addTodo: function(todoText) {
         this.todos.push({
         todoText: todoText,
@@ -78,6 +85,11 @@
       },
       toggleAllTodos: function() {
         todoList.toggleAll();
+      },
+      addTodo: function() {
+        var addTodoTextInput = document.getElementById('addTodoTextInput');
+        todoList.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
       }
     };
     </script>
