@@ -9,7 +9,6 @@
   <body> 
     <h1>Todo List</h1>
     <div>
-      <button onclick = "handlers.displayTodos()">Display Todos</button>
       <button onclick = "handlers.toggleAllTodos()">Toggle All</button>
     </div>
     
@@ -107,11 +106,13 @@
       },
       toggleAllTodos: function() {
         todoList.toggleAll();
+        view.displayTodos();
       },
       addTodo: function() {
         var addTodoTextInput = document.getElementById('addTodoTextInput');
         todoList.addTodo(addTodoTextInput.value);
         addTodoTextInput.value = '';
+        view.displayTodos();
       },
       changeTodo: function () {
         var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
@@ -119,16 +120,19 @@
         todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
         changeTodoPositionInput.value = '';
         changeTodoTextInput.value = '';
+        view.displayTodos();
       },
       deleteTodo: function () {
         var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
         todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
         deleteTodoPositionInput.value = '';
+        view.displayTodos();
       },
       toggleCompleted: function () {
         var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
         todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
         toggleCompletedPositionInput.value = '';
+        view.displayTodos();
       }
     };
     
@@ -138,7 +142,16 @@
         todosUl.innerHTML = '';
         for (var i = 0; i < todoList.todos.length; i++) {
           var todoLi = document.createElement('li');
-          todoLi.textContent = todoList.todos[i].todoText;
+          var todoTextWithCompletion = '';
+          var todo = todoList.todos[i];
+          
+          if (todo.completed === true) {
+            todoTextWithCompletion = '(x) ' + todo.todoText;
+          } else {
+            todoTextWithCompletion = '( ) ' + todo.todoText;
+          }
+
+          todoLi.textContent = todoTextWithCompletion;
           todosUl.appendChild(todoLi);
         }
       }
