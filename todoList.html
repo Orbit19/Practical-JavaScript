@@ -100,10 +100,8 @@
         changeTodoTextInput.value = '';
         view.displayTodos();
       },
-      deleteTodo: function () {
-        var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
-        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
-        deleteTodoPositionInput.value = '';
+      deleteTodo: function (position) {
+        todoList.deleteTodo(position);
         view.displayTodos();
       },
       toggleCompleted: function () {
@@ -142,6 +140,16 @@
         return deleteButton;
       }
     };
+    var todosUl = document.querySelector('ul');
+    todosUl.addEventListener('click', function(event) {
+      console.log(event.target.parentNode.id);
+      //get element that was clicke on
+      var elementClicked = event.target;
+      //check if element clicked is a delete button
+      if (elementClicked.className === 'deleteButton') {
+        handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+      }
+    });
     </script>
   </body>
 </html>
