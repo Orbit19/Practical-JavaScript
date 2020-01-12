@@ -2,8 +2,8 @@
 
 <html>
   <head> 
-    <title>Practical JavaScript Version 9</title>
-    <h1>Escape from the console</h1>
+    <title>Practical JavaScript Version 10</title>
+    <h1>Delete from the DOM on individiual li</h1>
   </head>
 
   <body> 
@@ -132,6 +132,12 @@
           todoLi.textContent = todoTextWithCompletion;
           todosUl.appendChild(todoLi);
         }
+      },
+      createDeleteButton: function() {
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'deleteButton';
+        return deleteButton;
       }
     };
     </script>
