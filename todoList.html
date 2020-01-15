@@ -2,8 +2,8 @@
 
 <html>
   <head> 
-    <title>Practical JavaScript Version 10</title>
-    <h1>Delete from the DOM on individiual li</h1>
+    <title>Practical JavaScript Todo List Version 11</title>
+    <h1>Destroy all for loops</h1>
   </head>
 
   <body> 
@@ -21,11 +21,6 @@
       <button onclick="handlers.changeTodo()">Change Todo</button>
       <input id="changeTodoPositionInput" type="number">
       <input id="changeTodoTextInput" type="text">
-    </div>
-
-    <div>
-      <button onclick="handlers.deleteTodo()">Delete</button>
-      <input id="deleteTodoPositionInput" type="number">
     </div>
 
     <div>
@@ -138,18 +133,19 @@
         deleteButton.textContent = 'Delete';
         deleteButton.className = 'deleteButton';
         return deleteButton;
+      },
+      setUpEventListeners: function () {
+        var todosUl = document.querySelector('ul');
+        todosUl.addEventListener('click', function(event) {
+          console.log(event.target.parentNode.id);
+          var elementClicked = event.target;
+          if (elementClicked.className === 'deleteButton') {
+          handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+          }
+        });
       }
     };
-    var todosUl = document.querySelector('ul');
-    todosUl.addEventListener('click', function(event) {
-      console.log(event.target.parentNode.id);
-      //get element that was clicke on
-      var elementClicked = event.target;
-      //check if element clicked is a delete button
-      if (elementClicked.className === 'deleteButton') {
-        handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-      }
-    });
+    view.setUpEventListeners();
     </script>
   </body>
 </html>
