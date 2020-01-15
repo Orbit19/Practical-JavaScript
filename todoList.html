@@ -59,20 +59,23 @@
       toggleAll: function() {
         var totalTodos = this.todos.length;
         var completedTodos = 0;
-        for (var i = 0; i < totalTodos; i++) {
-          if (this.todos[i].completed === true) {
+        
+        this.todos.forEach(function(todo) {
+          if (todo.completed === true) {
             completedTodos++;
           }
-        }
-        if (completedTodos === totalTodos) {  //case 1: if everything is true, make it false
-          for (var i = 0; i< this.todos.length; i++) {
-            this.todos[i].completed = false;
-          } 
+        });
+        
+        if (completedTodos === totalTodos) {
+          this.todos.forEach(function(todo) {
+            todo.completed = false;
+          });
+        
         } else {
-          for (var i = 0; i < this.todos.length; i++) {  //case 2: otherwise, make true
-            this.todos[i].completed = true;
-          }
-        }   
+          this.todos.forEach(function(todo) {
+            todo.completed = true;
+          });
+        }
       }
     };
     
